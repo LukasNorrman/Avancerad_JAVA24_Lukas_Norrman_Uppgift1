@@ -5,5 +5,4 @@ public class Main {
         RentalMenu rentalMenu = new RentalMenu();
         rentalMenu.start();
     }
-
 }

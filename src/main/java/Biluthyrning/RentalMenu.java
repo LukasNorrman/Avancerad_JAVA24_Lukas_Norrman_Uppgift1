@@ -1,5 +1,6 @@
 package Biluthyrning;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -38,7 +39,10 @@ public class RentalMenu {
                     System.out.println("Press enter to return to the menu...");
                     scanner.nextLine();
                 }
-                case 2 -> rentVehicle(scanner);
+                case 2 -> {
+                    rentVehicle(scanner);
+
+                }
                 case 3 -> returnVehicle(scanner);
                 case 4 -> {
                     System.out.println("Exiting. Thank you!");
@@ -54,6 +58,7 @@ public class RentalMenu {
         System.out.println("\nVehicles: ");
         for (Vehicle vehicle : vehicles) {
             System.out.println(vehicle.getModel() + " (" + vehicle.getRegistrationNumber() + "): "
+                    + "Price per day: " + vehicle.getPricePerDay() + "SEK. "
                     + vehicle.getDetails() + " - "
                     + (vehicle.isAvailable() ? "Available" : "Rented"));
         }
@@ -62,10 +67,16 @@ public class RentalMenu {
     private void rentVehicle(Scanner scanner) {
         System.out.println("Enter the registration number for the vehicle you want to rent: ");
         String registrationNumber = scanner.nextLine();
+
+        System.out.println("How many days: ");
+
+
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getRegistrationNumber().equalsIgnoreCase(registrationNumber)) {
                 if (vehicle.isAvailable()){
+                    vehicle.setDaysRented(scanner.nextInt());
                     vehicle.rentVehicle();
+
                 } else {
                     System.out.println("This vehicle is already rented. ");
                 }
@@ -83,7 +94,7 @@ public class RentalMenu {
             if (vehicle.getRegistrationNumber().equalsIgnoreCase(registrationNumber)) {
                 if (!vehicle.isAvailable()){
                     vehicle.returnVehicle();
-                    System.out.println("The cost of renting " + vehicle.getModel() + " was " + vehicle.calculateCost(1) + " SEK ");
+                    System.out.println("The cost of renting " + vehicle.getModel() + " was " + vehicle.calculateCost(vehicle.getDaysRented()) + " SEK ");
                 } else {
                     System.out.println("This vehicle was not rented. ");
                 }

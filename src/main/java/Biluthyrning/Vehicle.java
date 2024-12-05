@@ -5,6 +5,7 @@ abstract class Vehicle implements Rentable{
     private String registrationNumber;
     private double pricePerDay;
     private boolean available;
+    private int daysRented;
 
 
     public Vehicle(String model, String registrationNumber, double pricePerDay) {
@@ -37,7 +38,10 @@ abstract class Vehicle implements Rentable{
 
 
     public double calculateCost(int days) {
-        return pricePerDay * days;
+        return getPricePerDay() * days;
+    }
+    public double getPricePerDay() {
+        return pricePerDay;
     }
 
     public String getModel() {
@@ -54,6 +58,13 @@ abstract class Vehicle implements Rentable{
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public int getDaysRented() {
+        return daysRented;
+    }
+    public void setDaysRented(int daysRented) {
+        this.daysRented = daysRented;
     }
 
     public abstract String getDetails();
