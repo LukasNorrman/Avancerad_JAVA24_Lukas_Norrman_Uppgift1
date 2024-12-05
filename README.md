@@ -16,8 +16,7 @@ I git bash, skriv följande:
 4. cd main 
 5. cd java
 6. cd Biluthyrning
-7. javac main.java  // har fått problem med uppstart från denna punkt. Vet inte hur jag ska ta mig till
-8. java main
+7. javac main.java 
 
 
 
